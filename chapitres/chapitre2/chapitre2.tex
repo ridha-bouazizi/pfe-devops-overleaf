@@ -1,218 +1,422 @@
-\graphicspath{{./chapitres/chapitre2/figures/}}
+\graphicspath{{./assets/}}
 \setcounter{mtc}{2}
-\chapter{Analyse\textcolor{white}{J}et\textcolor{white}{J}spécification\textcolor{white}{J}des\textcolor{white}{J}besoins}
-\fancyhead[R]{\ungaramond\small\textbf{Chapitre\textcolor{white}{J}2:\textcolor{white}{J}Analyse\textcolor{white}{J}et\textcolor{white}{J}spécification\textcolor{white}{J}des\textcolor{white}{J}besoins}}
+\chapter{Requirement analysis  }
+\fancyhead[R]{\ungaramond\small\textbf{Chaptre 2: Requirement analysis  }}
 \minitoc
 \newpage
 \section*{Introduction}
-Dans ce chapitre, nous allons analyser et identifier les besoins de ce projet. On va commencer par définir les acteurs de ce projet, identifier les besoins fonctionnels et non fonctionnels, réaliser le diagramme de cas d’utilisations global. Pour finir avec le backlog produit, la planification des sprints sans oublier l’architecture physique et logique de cette solution ainsi que les technologies et les logiciels utilisés pour aboutir au résultat voulu.
+In this chapter, our analysis is aimed at identifying the key actors in our design, the functional and non-functional needs our system is to provide for. We will then move on to an overview of the sprint bursts we have realized. Finally, we will provide a dissection of the ecosystem in the form of various UML diagrams.
+\section{Capturing requirements}
+\subsection{Identifying key actors}
+In this context, an actor is a user or any other system that interacts with the subject by exchanging signals and data.
+\paragraph{Cloud architecture related actors:}
+In order to have a devSecOPS compliant approach, it needs to be built on top of a containerized, highly available cloud infrastructure:
+\newline
+-	Cloud architect: He is responsible for designing and implementing cloud computing solutions.
+\newline
+-	IaC tools: Although being a piece of software, it is necessary in order to automate provisioning and configuration of resources.
+\newline
+-	Cloud provider: Usually a third-party entity that allows for elastically allocating resources.
+\newline
+-	DevSecOPS team: A devSecOPS engineer is the consumer in this case, he uses the provisioned resources to build an ecosystem that is compliant with organizational needs.
+\paragraph{CI/CD related actors:}
+The cloud resources hold the value of a tool that is then leveraged to assist the development process:
+\newline
+-	DevSecOPS team: uses the provisioned resources and follows an agile devSecOPS approach to build an ecosystem that is compliant with organizational needs.
+\newline
+-	Developer: A consumer of the devSecOPS ecosystem as well as the CI/CD workflow.
+\newline
+-	Company client: He is the end user and provides the specifications on software development.
 
+\subsection{Functional requirements}
 
-\section{Capture\textcolor{white}{J}des\textcolor{white}{J}besoins}
-\subsection{Identification\textcolor{white}{J}des\textcolor{white}{J}acteurs}
+Formulating an understanding on functional requirements is a primordial phase in the implementation of the subject.
+\newline
+-	A cloud-based infrastructure capable of hosting the devSecOPS ecosystem in terms of compute resources, storage and networking.
+\newline
+-	A continuous integration platform : The desired goal is to provide a CI workflow that channels the development effort in order to continuously ensure code quality.
+\newline
+-	A CD workflow: provide an automated and continuous delivery and deployment process.
 
-Un acteur\textcolor{white}{J}est\textcolor{white}{J}une\textcolor{white}{J}entité\textcolor{white}{J}externe au\textcolor{white}{J}système. Il\textcolor{white}{J}représente\textcolor{white}{J}une\textcolor{white}{J}personne\textcolor{white}{J}ou\textcolor{white}{J}un\textcolor{white}{J}autre système\textcolor{white}{J}informatique s'attend\textcolor{white}{J}à\textcolor{white}{J}être\textcolor{white}{J}une\textcolor{white}{J}interface d'accès. Il\textcolor{white}{J}interagit\textcolor{white}{J}avec\textcolor{white}{J}le système en\textcolor{white}{J}envoyant\textcolor{white}{J}ou\textcolor{white}{J}en\textcolor{white}{J}recevant\textcolor{white}{J}des\textcolor{white}{J}messages
-Par\textcolor{white}{J}ailleurs, notre\textcolor{white}{J}application\textcolor{white}{J}fera intervenir des acteurs primaires et des acteurs secondaires.
-
-\textbf{Formulateur}: C’est la personne qui aura la main de créer et visualiser les simulations.
-
-\newline \textbf{Marketeur}: C’est la personne qui aura la main de créer, visualiser et valider les simulations.
-
-
-\subsection{Besoins\textcolor{white}{J}fonctionnels}
-Le recueil des besoins fonctionnels est une phase primordiale dans le projet, elle détermine ce que le projet est censé faire et définir les cas d’utilisation pour chaque acteur. Notre solution contiendra ces différentes fonctionnalités :
-\begin{itemize}
-\begin{itemize}[label=--]
-\item Un espace de création des simulations : L’utilisateur peut choisir le type des cheveux, la couleur de base ainsi que la couleur de la teinte puis générer la simulation. Cette dernière pourra être sauvegardée ou validée ou réinitialisée. L’utilisateur aura la possibilité de modifier les paramètres et régénérer la simulation.
-\item Un espace de visualisation des simulations : Suite à la génération des simulations, l’utilisateur pourra comparer entre les images contenant la couleur de base et les images synthétisées et zoomer sur les images simulées.
-\item Un espace de gestion des simulations : L’utilisateur pourra visualiser et filtrer la liste des simulations, rechercher une simulation et dupliquer une simulation.
+\subsection{Non-functional requirements}
+\begin{itemize}[label=\textbullet,font=\normalsize]
+\addtolength{\itemindent}{1cm}
+\item High availability and resilience: Typically satisfied by distributed backend resources, orchestration and load balancing of workloads. 
+\item Performance and scalability: Usually dependent on the cloud provider as well as the used technologies.
+\item Security: An inbuilt quality that cloud and DevSecOPS offer by design.
+\item Observability: A highly achievable need due the pluggability of containerized environments.
+\item Usability: A somewhat hard to achieve requirement due to the rarity of a technologically adept workforce. 
+\item Relatively low cost : the need to prioritize self-hosting and adopting opensource alternatives.
 \end{itemize}
+\newpage
+\section{Product backlog }
 
-\end{itemize}
+\subsection{Backlog history }
 
-\textcolor{white}{J} 
-\subsection{Besoins\textcolor{white}{J}non\textcolor{white}{J}fonctionnels}
-Il s’agit des besoins caractérisant le système en terme de performance et de qualité. Dans notre cas, les besoins non fonctionnels identifiés sont :
-
-\begin{itemize}
-\begin{itemize}[label=--]
-\item\textcolor{white}{J} \textbf{La sécurité}\textcolor{white}{J}: Le flux de données doit être sécurisé pour garantir la confidentialité des informations. 
-\item\textcolor{white}{J} \textbf{La rapidité de traitement}\textcolor{white}{J}:
-Il\textcolor{white}{J}est\textcolor{white}{J}impérativement\textcolor{white}{J}nécessaire\textcolor{white}{J}que\textcolor{white}{J}la\textcolor{white}{J}durée d’exécution\textcolor{white}{J}des traitements\textcolor{white}{J}s’approche\textcolor{white}{J}le\textcolor{white}{J}plus\textcolor{white}{J}possible\textcolor{white}{J}du\textcolor{white}{J}temps\textcolor{white}{J}réel. 
-\item\textcolor{white}{J} \textbf{La performance}\textcolor{white}{J}:
-Répond à toutes les exigences des usagers d’une manière optimale. 
-\item\textcolor{white}{J} \textbf{L’ergonomie}\textcolor{white}{J}:
-La\textcolor{white}{J}plateforme\textcolor{white}{J}doit\textcolor{white}{J}être\textcolor{white}{J}facile\textcolor{white}{J}à\textcolor{white}{J}utiliser. En effet,\textcolor{white}{J}les\textcolor{white}{J}interfaces utilisateurs\textcolor{white}{J}doivent\textcolor{white}{J}être\textcolor{white}{J}conviviales\textcolor{white}{J}c’est-à-dire\textcolor{white}{J}simples,\textcolor{white}{J}ergonomiques\textcolor{white}{J}et\textcolor{white}{J}adaptées à\textcolor{white}{J}l’utilisateur.
-\end{itemize}
-\end{itemize}
-
-\section{Backlog\textcolor{white}{J}du\textcolor{white}{J}produit}
-\subsection{Les\textcolor{white}{J}histoires\textcolor{white}{J}du\textcolor{white}{J}Backlog\textcolor{white}{J}du\textcolor{white}{J}produit}
-Le\textcolor{white}{J}tableau\textcolor{white}{J}\ref{tab:backlog}\textcolor{white}{J}présente Le backlog du produit de notre\textcolor{white}{J}application est\textcolor{white}{J}présenté si dessous.
-
-\begin{center}
-\textcolor{white}{J}\textcolor{white}{J}\textcolor{white}{J} \textcolor{white}{J} 
-
-\begin{longtable}[!ht]{|m{1cm}|m{3cm}|m{1cm}|m{7cm}|m{1.5cm}|c|}
+\begin{longtable}[!ht]{|m{1cm}|m{3cm}|m{1cm}|m{7cm}|m{1.2cm}|}
 \hline
-\textbf{id features} & \textbf{features} & \textbf{id story} & \textbf{User Story} & \textbf{Priorité}\\
+ {\textbf{Epic ID}} & {\textbf{EPIC}} & {\textbf{Story ID}} & {\textbf{Story}} & {\textbf{Prior-ity}} \\
+ \hline
+0 & \raggedright Certified devSecOps training &	0.1 &	Managing and running custom VMs. & \\
+\cline{3-5}
+&   & 0.2 &	Managing docker containers.	& \\
+\cline{3-5}
+&   & 0.3 &	CI/CD pipelines. & \\
 \hline
-1 & Création des simulations & 1.1 & En tant qu’utilisateur je souhaite choisir la couleur de la teinte. & 100\\
+1 & Maintenance and cleanup. &	1.1	& Exploring existing infrastructure and resources. & \\
 \cline{3-5}
-&  & 1.2 & En tant qu’utilisateur je souhaite recevoir les images synthétisées en temps  réel. & 100\\
-\cline{3-5}
-&  & 1.3 & En tant qu’utilisateur je souhaite sauvegarder la session. & 80\\
-\hline
-2 & Visualisation des simulations & 2.1 & En tant qu’utilisateur je souhaite comparer entre les images synthétisées et les images de base. & 100\\
-\cline{3-5}
-&  & 2.2 & En tant qu’utilisateur je souhaite effectuer un zoom sur l’image synthétisée. & 100\\
-
+&   &	1.2 & Performing maintenance on enterprise assets. & \\
 
 \hline
-3 & Gestion des simulations  & 3.1 & En tant qu’utilisateur je souhaite visualiser la liste des simulations. & 100\\
-\cline{3-5}
-&  & 3.2 & En tant qu’utilisateur je souhaite rechercher une simulation . & 100\\
-\cline{3-5}
-&  & 3.3 & En tant qu’utilisateur je souhaite filtrer la liste des simulations par état (validée et non validée). & 100\\
-
+2 & Cloud design &	2.1 &	Information gathering phase. & \\
 \hline
-\caption{Product Backlog}
-\label{tab:backlog}
+3 & Resource provisioning &	3.1 &	Provisioning resources using IaC playbooks. & \\
+\hline
+4 & Infrastructure setup. &	4.1 &	Infrastructure setup using IaC playbooks. & \\
+\hline
+5 & \raggedright Initial PaaS setup. &	5.1 &	Setting up ingress controller and TLS certificate provisioner.	 & \\
+\cline{3-5}
+&   & 5.2 &	Setting distributed storage backend.	 & \\
+\cline{3-5}
+&   & 5.3 &	Setting up network load balancer.	 & \\
+  \hline
+6 & Deployment of CI/CD platform &	6.1 &	Setting up personalized CI/CD orchestrator.	 & \\
+\cline{3-5}
+&   & 6.2 &	Setting up quality gate (CI).	 & \\
+\cline{3-5}
+&   & 6.3 & Setting up CD controller.	 & \\
+  \hline
+7 & \raggedright Preparation of automated CICD workflows. &	7.2 &	Structuring SCM backend	 & \\
+\cline{3-5}
+&   & 7.2 &	 \raggedright Using GitOPS and devOPS tools to automate CI/CD pipelines.	 & \\
+   \hline
+   \newpage
+     \hline
+8 & \raggedright Deployment of authentication / authorization backend 	& 8.1 & \raggedright Self-managing distributed database storage backends (redis, mongoDB, postgresql).	 & \\
+\cline{3-5}
+&   & 8.2 &	\raggedright Deployment and configuration of authentication and authorization services.	 & \\
+\cline{3-5}
+&   & 8.3 &	\raggedright Configuring forward auth middlewares for secure access.	 & \\
+   \hline
+9 & \raggedright Implement a resilient disaster recovery strategy. & 9.1 &\raggedright  Provisioning cloud storage resources.		 & \\
+\cline{3-5}
+&   & 9.2 & \raggedright Preparing and applying backup strategy for application specific data.	 & \\
+\cline{3-5}
+&   & 9.3 &	\raggedright Preparing and applying backup strategy for PaaS specific workloads.	 & \\
+ \hline
+% 10	& \raggedright Load testing, benchmarking.& 10.1 & Load testing and benchmarking of assets. & \\	
+% \hline
+
 \end{longtable}
+% \raggedright for space issue
 
-\end{center}
+\newpage
+\subsection{Sprint planification }
+The project lasted seven months and a half starting on March 1st 2022. Overall, ten sprints have been followed with the typical duration of 3 weeks for each. 
 
-Le backlog produit représenté dans la figure nous permet de définir dans chaque fonctionnalité les user stories, leurs identifiants et leurs priorités selon la difficulté de chaque tâche à faire au cours du développement de l’application.
-
-\subsection{Planification\textcolor{white}{J}des\textcolor{white}{J}sprints}
-Le\textcolor{white}{J}projet\textcolor{white}{J}s'est\textcolor{white}{J} déroulé\textcolor{white}{J} pendant\textcolor{white}{J} six\textcolor{white}{J} mois\textcolor{white}{J} et\textcolor{white}{J} s'est\textcolor{white}{J} étendu\textcolor{white}{J} sur\textcolor{white}{J} la\textcolor{white}{J} période\textcolor{white}{J} entre\textcolor{white}{J} le\textcolor{white}{J} 01\textcolor{white}{J} Décembre\textcolor{white}{J} 2021\textcolor{white}{J} et\textcolor{white}{J} le\textcolor{white}{J} 30\textcolor{white}{J} Avril\textcolor{white}{J} 2022.
 
 \begin{table}[h!]
 \center
-\begin{tabular}[b]{|m{3cm}|m{3cm}|m{3cm}|m{3cm}|}
+\begin{tabular}[b]{|m{2cm}|m{9cm}|m{2cm}|}
 \hline
-\rowcolor{white}
-Sprint 0 & Sprint 1 & Sprint 2 & Sprint 3 \\
+ {\textbf{Sprint ID}} & {\textbf{Sprint Details }} & {\textbf{Duration }} \\ \hline 
+0 
+&
+The first period was spent following a company sponsored devSecOps training. The following elements have been covered: 
+Creating vm images using packer, spinning up virtual machines using vagrant,  
+Using docker, docker compose plugin and docker container orchestration in swarm, 
+An overview on CI/CD pipelines using Jenkins. 
+&
+4 weeks  \\
 \hline
-Compréhension du périmètre fonctionnel et étude des besoins clients fonctionnels et non fonctionnels & mise en place du protocole de communication avec le moteur graphique & Développement de la partie backend & Développement de la partie frontend et déploiement de la solution \\
-\hline
-Du 1 Décembre au 3 Janvier  & Du 4 Janvier au 29 Janvier & Du 31 Janvier au 31 Mars & Du 1 Avril au 15 Avril \\
-\hline
+1 
+&
+The following three weeks were dedicated to exploring the existing infrastructure. Performing some maintenance and planning for migration. 
+&
+3 weeks  \\ \hline
+2 
+&
+Next, we have started the information gathering phase in which we have formed an initial overview of the desired goals we would like to reach. 
+&
+2 weeks \\ \hline
+3 
+&
+The use of IaC allowed us to provision the main cloud resources dedicated to hosting the PaaS infrastructure. 
+&
+2 weeks \\ \hline
+4 
+&
+An initial setup of the provisioned resources was then automated and performed. 
+&
+3 weeks \\ \hline
+5 
+&
+Putting in place the basic PaaS services, namely a distributed storage backend, a layer 2 load balancer, a cloud-native layer 4 ingress controller to route requests serving also as a reverse proxy and an application load balancer. 
+&
+3 weeks \\ \hline
+6 
+&
+Mounting the backing CI/CD services which are mostly personalized to company needs. 
+&
+3 weeks \\ \hline
+7 
+&
+Levering the CI/CD ecosystem to put in place pipelines to automate product testing, code quality checks, and delivery. 
+&
+4 weeks \\ \hline
+8 
+&
+Securing access to company assets using an Authentication/Authorization middleware. 
+&
+3 weeks \\ \hline
+9 
+&
+Putting in place a disaster recovery strategy that leverages distributed storage and S3 compliant object storage. 
+&
+3 weeks \\ \hline
+% 10 
+% &
+% Assessing the performance of the PaaS put in place and planning to enhancements 
+% &
+% 2 weeks \\ \hline
 \end{tabular}
-\caption{Planification\textcolor{white}{J}des\textcolor{white}{J}sprints}
-\label{tab:tab-s}
+\caption{Table Sprint planification}
+\textcolor{white}{I} \label{tab:tab-m}
 \end{table}
 
 \newpage
-\section{Analyse}
-\subsection{Modélisation\textcolor{white}{J}de\textcolor{white}{J}cas\textcolor{white}{J}d'utilisation}
-En\textcolor{white}{J}UML, pour\textcolor{white}{J}avoir\textcolor{white}{J}une\textcolor{white}{J}capture sur les fonctionnalités\textcolor{white}{J}du\textcolor{white}{J}système, on utilise le diagramme de cas d’utilisation. Ce diagramme est représenté par la figure \ref{fig:usecaseGlob}.
+\section{Modeling for cloud architecture and devops }
 
+In order to facilitate collaboration and formulate an understanding of the system specifications and requirements, we have used the Unified Visual Language (UML). 
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=1\textwidth,angle=00]{chapitres/chapitre2/figures/diagUseCaseGen.png}
-\caption{Diagramme\textcolor{white}{J}de\textcolor{white}{J}cas\textcolor{white}{J}d'utilisation\textcolor{white}{J}global}
-\label{fig:usecaseGlob}
+\subsection{Cloud related diagrams }
+
+% \subsubsection{Package diagram of the underlying cloud resources:}
+
+% \begin{figure}[!ht]\centering
+% \includegraphics[width=0.8\textwidth,angle=00]{assets/f2.jpg}
+% \caption{Package diagram of the underlying cloud resources}
+% \label{fig:cloudResrc}
+% \end{figure}
+
+% \noindent The cluster resources are basically cloud instances with different specifications tailored to their use cases. Three major groups of resources are distinguished in this diagram : Control plane instances, Compute instances and storage assets which are object store buckets and compute instances to which raw block stores are attached. 
+
+% \newpage
+% \subsubsection{Package diagram for the PaaS logical components:}
+% \begin{figure}[!ht]\centering
+% \includegraphics[width=0.8\textwidth,angle=00]{assets/f3.jpg}
+% \caption{Package diagram of the underlying cloud resources}
+% \label{fig:PaasDiag}
+% \end{figure}
+% This figure illustrates a package design of the main PaaS services. 
+
+\subsubsection{Class diagram of the provisioned cloud resources:}
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f2.jpg}
+\caption{Package diagram of the underlying cloud resources}
+\label{fig:f2}
 \end{figure}
 
-Le Formulateur peut consulter la listes des simulations où il a le choix de filtrer par status et rechercher une simulation.Il peut egalement creer une simulation en specifiant le type de cheveux ,la couleur de base et la couleur personnalisée ensuite il aura les differents perspectives de la simulation.Il peut comparer la simulation avec la couleur de base,effectuer un zoom sur une perspective ou reinitialiser la simulation.
-Apres avoir simuler une couleur de cheveux,le formulateur peut la modifier ou l'enregistrer.
-Finalement,Le marketeur peut valider une simulation.
+\subsubsection{Sequence diagram for the provisioning and configuration:}
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f3.jpg}
+\caption{Sequence diagram for the provisioning and configuration}
+\label{fig:f3}
+\end{figure}
+
+\subsection{CI/CD related diagrams}
+
+\subsubsection{Sequence diagram of a sample deployment: }
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f4.jpg}
+\caption{Sequence diagram of a sample deploymen}
+\label{fig:f4}
+\end{figure}
+
+\newpage 
+\subsubsection{Sequence diagrams of the CI/CD workflow: }
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f5.jpg}
+\caption{Sequence diagrams of the CI/CD workflow}
+\label{fig:f5}
+\end{figure}
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f6.jpg}
+\caption{Sequence diagrams of the CI/CD workflow}
+\label{fig:f6}
+\end{figure}
+
 
 \newpage
-\subsection{Diagramme\textcolor{white}{J}de\textcolor{white}{J}classe\textcolor{white}{J}d'analyse}
-la figure \ref{fig:usecasegenerale} représente le diagramme de classe d'analyse globale de notre projet.
-\textcolor{white}{J} \begin{figure}[!ht]
-\centering
-\includegraphics[width=1\textwidth,angle=00]{chapitres/chapitre2/figures/Diagramme de classe global.jpeg}
-\caption{Diagramme\textcolor{white}{J}de\textcolor{white}{J}classe\textcolor{white}{J}d'analyse\textcolor{white}{J}global}
-\label{fig:usecasegenerale}
-\end{figure}
-Une simulation est caracterisée par un identifiant unique,un type de cheveux,une couleur de base et une couleur personnalisée de type LABColor,un titre,un projet,une marque,une description,un createur, la liste des validateurs,la date de creation et la liste des differents perspetives de la couleur simulées et la couleur de base.
+\subsection{Technological choices }
+% \paragraph{Development tools }
+In this section, we layout the cloud provider choice,
+\subsubsection{Cloud provider choice: } 
 
+\paragraph{OVH : }
+
+A decisive factor concerning the cloud provider choice is related to company’s desire to opt mainly for a provider that is based in France.  
+
+\paragraph{Openstack: }
+
+OVH uses openstack as its backing cloud computing infrastructure. Thus, conversing with components as neutron, nova, glance, swift is a must. 
+
+\subsubsection{Infrastructure as code tools }
+
+\paragraph{Terraform: }
+
+An industry standard for conversing with cloud providers in order to provision and configure resources. 
+
+\paragraph{Ansible: }
+
+We have opted for ansible because it’s faster than its alternatives namely chef, and easier to use.  
+
+\subsubsection{Containerization and orchestration techniques: }
+
+\paragraph{Container orchestrator: Kubernetes v1.21 }
+
+An open source container orchestration tool that automates the deployment, scaling, and managing containerized applications. 
+
+\paragraph{Container runtime : containerd }
+
+A daemon for linux that manages the complete container lifecycle. 
+
+\paragraph{Container platform : docker-ce v20.10 }
+
+The container management tool that uses containerd to manage container lifecycles and their underlying abstractions such as volumes and networking.  
+
+\paragraph{Container networking: Calico }
+
+A cloud-native plugin deployment in Kubernetes that uses the CNI API to provide a networking and security solution in the cluster. 
+
+\paragraph{Container platform : docker-ce v20.10 }
+
+The container management tool that uses containerd to manage container lifecycles and their underlying abstractions such as volumes and networking. 
+
+\paragraph{Container networking: Calico }
+
+A cloud-native plugin deployment in Kubernetes that uses the CNI API to provide a networking and security solution in the cluster. 
+
+
+\subsubsection{Self-hosted PaaS services }
+
+\paragraph{Distributed storage backend: Ceph }
+
+A highly reliable, open source, distributed storage platform offering bloc , filesystem and object storage volumes to be leveraged by the orchestrator. 
+
+\paragraph{Ingress Controller: Traefik ingress controller }
+
+An open-source edge router serving as an ingress controller, a reverse proxy and a load balancer. 
+
+\paragraph{Layer 2 load balancer: MetalLB }
+
+This opensource load balancer provides support for bare metal Kubernetes clusters using standard protocols. 
+
+\paragraph{Private registry: harbor }
+
+An open-source private registry serving as a backend to sore artifacts in a secure manner. 
+
+\paragraph{Database storage (document): Redis, MongoDB }
+
+Database storage in document format is provided by a replicated mongoDB cluster. An in memory redis cluster allows for session storage. 
+
+\paragraph{Database storage (SQL): PostgreSQL }
+
+A PostgreSQL cluster in HA mode coupled with a PGpool middleware to distribute load and control replication. 
+
+\paragraph{Authentication middleware: Authelia }
+
+An open-source portal serving as an authentication and authorization server. It leverages the “forward auth” capability of the ingress controller to regulate access. 
+
+\paragraph{User management: OpenLDAP }
+
+An open-source implementation of the Lightweight Directory Access Protocol that is used to manage organizational user credentials and details. 
+
+\paragraph{SCM tool: Gitlab }
+
+An enterprise solution for source code management and versioning. 
+
+\paragraph{CI/CD orchestration: Jenkins }
+
+An open-source automation server which enables build, test, and deployment processes. 
+
+\paragraph{Quality gate: SonarQube }
+
+An open-source platform that allows for continuous inspection of code quality. 
+
+\paragraph{CD controller: ArgoCD, ArgoRollouts }
+
+An open-source declarative, GitOPS continuous delivery tool for Kubernetes. 
+
+\paragraph{Disaster recovery: Velero }
+
+An open-source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes. 
+
+\paragraph{Config formats: YAML, TOML, HCP config, JSON }
+
+\subsubsection{Development tools }
+
+\paragraph{Development IDE: VS Code }
+
+A pluggable, lightweight opensource IDE. 
+
+\paragraph{SSH platform: Termius }
+
+A platform that offers port forwarding and secure file transfer over ssh. 
+
+\subsubsection{Development languages }
+
+\paragraph{Scripting: python, shell, groovy }
+
+Shell was used to interface with the linux operating system. For conversing with APIs, an assortment of python scripts were developed to automate various tasks, namely, database backups. Jenkins pipelines and configurations were written in groovy. 
+
+\paragraph{Templating: YTT, jinja2 }
+
+To template various configuration files that are dependent on the deployment environment, we used YTT for YAML/JSON. Jinja2 was the main templating tool for ansible playbooks. 
 
 \newpage
-\subsection{Environnement\textcolor{white}{J}logiciel}
-Dans\textcolor{white}{J}cette \textcolor{white}{J}partie, \textcolor{white}{J}on \textcolor{white}{J}va \textcolor{white}{J}présenter \textcolor{white}{J}les \textcolor{white}{J}différents \textcolor{white}{J}Framework, \textcolor{white}{J}technologies, \textcolor{white}{J}outils, \textcolor{white}{J}et \textcolor{white}{J}configurations \textcolor{white}{J}nécessaires \textcolor{white}{J}pour \textcolor{white}{J}l’implémentation \textcolor{white}{J}de \textcolor{white}{J}l’application.
 
-\subsubsection*{.NET Core [2]}
-ASP.NET Core est une infrastructure multiplateforme, haute performance et open source permettant de créer des applications modernes, compatibles avec le cloud et connectées à Internet. Avec ASP.NET Core, nous aurons la possibilité de créer des applications web et des services et des back-ends mobiles et déployer nos solutions dans le cloud ou localement.
+\section{Architectural specifications}
 
+\subsection{Physical architecture}
 
+The following figure is an overview of the infrastructure resource setup:
 
-\subsubsection*{React Js[3]}
-ReactJS est une bibliothèque JavaScript déclarative, efficace et flexible permettant de créer des interfaces utilisateur (UI). Ce Framework permet de composer des interfaces utilisateur complexes à partir de petits morceaux de code isolés appelés « composants ».
-
-
-\subsubsection*{Visual Studio [4]}
-Visual Studio IDE (Integrated Development Environment) complet idéal pour les développeurs .NET et C++ sur Windows. Entièrement rempli d’un bon ensemble d’outils et de fonctionnalités permettant d’élever et d’améliorer chaque étape du développement de logiciels. 
-
-
-
-\subsubsection*{GitLab[5]}
-GitLab est un logiciel libre de forge basé sur git et un système de suivi des bugs, l’intégration continue et la livraison continue. Le logiciel est utilisé par plusieurs grandes entreprises informatiques, dont L’Oréal.
-
-
-
-
-\subsubsection*{ShareLaTeX[6]}
-ShareLaTeX\textcolor{white}{J} est\textcolor{white}{J} un\textcolor{white}{J} éditeur\textcolor{white}{J} LaTeX\textcolor{white}{J} en\textcolor{white}{J} ligne,\textcolor{white}{J} collaboratif,\textcolor{white}{J} en\textcolor{white}{J} temps\textcolor{white}{J} réel\textcolor{white}{J} et\textcolor{white}{J} compileur\textcolor{white}{J} PDF.\textcolor{white}{J} Par\textcolor{white}{J} ailleurs,\textcolor{white}{J} ShareLaTeX\textcolor{white}{J} fut\textcolor{white}{J} libéré\textcolor{white}{J} en\textcolor{white}{J} février\textcolor{white}{J} 2014.\textcolor{white}{J} Le\textcolor{white}{J} 20\textcolor{white}{J} Juillet\textcolor{white}{J} 2017,\textcolor{white}{J} ShareLatex\textcolor{white}{J} a\textcolor{white}{J} été\textcolor{white}{J} racheté\textcolor{white}{J} par\textcolor{white}{J} overleaf5\textcolor{white}{J} qui\textcolor{white}{J} a\textcolor{white}{J} réuni\textcolor{white}{J} les\textcolor{white}{J} services\textcolor{white}{J} d'overleaf\textcolor{white}{J} et\textcolor{white}{J} de\textcolor{white}{J} Sharelatex\textcolor{white}{J} sur\textcolor{white}{J} une\textcolor{white}{J} seule\textcolor{white}{J} plateforme\textcolor{white}{J} .\textcolor{white}{J} La\textcolor{white}{J} fusion\textcolor{white}{J} des\textcolor{white}{J} deux\textcolor{white}{J} services\textcolor{white}{J} au\textcolor{white}{J} sein\textcolor{white}{J} de\textcolor{white}{J} overleaf\textcolor{white}{J} v2\textcolor{white}{J} a\textcolor{white}{J} été\textcolor{white}{J} effectué\textcolor{white}{J} au\textcolor{white}{J} mois\textcolor{white}{J} de\textcolor{white}{J} septembre\textcolor{white}{J} 2018. \\
-
-
-
-\subsubsection*{VsCode[7]}
-Visual Studio Code est un Éditeur de code source autonome qui est le meilleur choix le développement web, avec des extensions pour prendre en charge à peu près n’importe quel langage de programmation.
-
-
-
-
-\section{Spécification\textcolor{white}{J}Architecturale}
-\subsection{Architecture\textcolor{white}{J}logique}
-L’architecture logique d’une application informatique c’est l’organisation des composants logiques de chaque solution. 
-
-\subsubsection{Architecture\textcolor{white}{J}Back-end}
-La partie Backend interagit avec la partie présentation ou bien frontend en la fournissant par les métiers implémentés. Elle est divisée en 3 couches : La première c’est la couche modèle qui contient les documents connectés directement avec notre base de données. La deuxième est la couche services, c’est l’intermédiaire entre les autres couches en leur fournissant les services et les métiers de l’application. La troisième est la couche Controller, elle assurer la communication entre la partie serveur et client en envoyant des requêtes HTTP définis par le Rest API. Le client communiquera aussi avec le serveur avec le bus de communication instantané Web Socket.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.8\textwidth,angle=00]{chapitres/chapitre2/figures/ArchLog-B.png}
-\caption{Architecture\textcolor{white}{J}logique\textcolor{white}{J}des\textcolor{white}{J}serveur\textcolor{white}{J}d'application}
-\label{fig:archb}
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f7.jpg}
+\caption{Physical architecture}
+\label{fig:f7}
 \end{figure}
 
 \newpage
-\subsubsection{Architecture\textcolor{white}{J}Front-end}
-L’architecture logique d’une application informatique c’est l’organisation des composants logiques de chaque solution.
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.8\textwidth,angle=00]{chapitres/chapitre2/figures/ArchLog-F.png}
-\caption{Architecture\textcolor{white}{J}logique\textcolor{white}{J}Front-end}
-\label{fig:logiqueFront}
+
+\subsection{PaaS deployment architecture} 
+Next we layout the organization of the subsystems, software classes, and layers that make the complete logical system of our PaaS infrastructure :
+
+\begin{figure}[!ht]\centering
+\includegraphics[width=0.8\textwidth,angle=00]{assets/f8.jpg}
+\caption{PaaS infrastructure}
+\label{fig:f8}
 \end{figure}
 
-\subsection{Architecture\textcolor{white}{J}physique}
-L’architecture\textcolor{white}{J}physique nous permet de décrire les composants matériels de l’application, avant de commencer la conception et le développement de l’application nous devons préparer cette architecture. Elle est décrite dans la figure \ref{fig:physique} ci-dessous.
+\section{Workspace description}
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.8\textwidth,angle=00]{chapitres/chapitre2/figures/ArchPhy.png}
-\caption{Architecture physique\textcolor{white}{J}de\textcolor{white}{J}notre\textcolor{white}{J}application}
-\label{fig:physique}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.8\textwidth,angle=00]{chapitres/chapitre2/figures/architecture physique.png}
-\caption{Diagramme de deploiement de\textcolor{white}{J}notre\textcolor{white}{J}application}
-\label{fig:physique}
-\end{figure}
-
-
-\section{Environnement\textcolor{white}{J}de\textcolor{white}{J}travail}
-Afin de réaliser le projet, la société nous a fourni un ordinateur HP et un VDI Citrix VDI (infrastructure de postes de travail virtuels) et DaaS (Desktop-as-a-Service). C’est une forme de virtualisation de postes qui prend en charge les utilisateurs mobiles et l’accès distant.
-Le VDI améliore la sécurité par rapport à une exécution locale. Toutes les données d’une connexion VDI résident sur le serveur, pas sur l’appareil. En cas de vol d’un point de terminaison, il n’y a donc rien à exfiltrer de son stockage local. En outre, l’environnement VDI est entièrement contrôlé de façon centralisée depuis un Datacenter L’Oréal.
-Les solutions de bureaux virtuels soutiennent la mobilité et l’accès distant, et permettent au service IT de délivrer des postes de travail de façon sécurisée.
+To implement the project, the company has provided us with the necessary hardware equipment, certified preliminary training as well as the desired cloud resources.
 
 \section*{Conclusion}
-Tous les besoins fonctionnels et non fonctionnels ont été traité par ce deuxième chapitre et cela a été fait par la présentation du diagramme de cas d’utilisation global ainsi que le backlog produit ce qui a engendré une planification optimale des différents sprints du projet. Ce chapitre nous a permis de mettre l’accent sur l’architecture physique et logique et aussi de spécifier les technologies et les outils auxquels nous avons eu recours.
+All the functional and non-functional requirements have been viewed in this chapter through the use of package, class and sequence diagrams. We have also formed an understanding on the underlying resources and services through the physical architecture and the PaaS deployment diagram.
+
+
+% \paragraph{Infrastructure as code tools  }
+
+% \paragraph{Containerization and orchestration techniques  }
+% \paragraph{Self-hosted paas services }
+% \paragraph{Cloud provider choice}
+
+
+% \section*{Conclusion}

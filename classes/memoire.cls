@@ -19,7 +19,7 @@
 %				IMPORTS					%
 %---------------------------------------%
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[french]{babel}
+\RequirePackage[french, english]{babel}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{minitoc,soul,colortbl,multirow,longtable,xcolor,lastpage,fancyhdr,setspace,anyfontsize,titlesec,amsmath,amsfonts,marvosym,mathrsfs,array,multicol,enumitem,graphicx,float,pgf,pifont,xcolor,amsthm,thmtools,tikz}%,pgfplots}
 \RequirePackage{latexsym,amssymb,amsthm,ragged2e}
@@ -43,8 +43,12 @@
 %		commandes personnelles			%
 %---------------------------------------%\\
 \onehalfspacing%espace interligne = 1,5
-\setlength\parindent{0pt} % sets indent to zero
+% \setlength\parindent{0pt} % sets indent to zero
 \setlength{\parskip}{6pt} % changes vertical space between paragraphs
+\renewcommand\thechapter{\Roman{chapter}}
+\renewcommand\thesection{\Roman{section}.}
+\renewcommand{\thesubsection}{\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{(\alph{subsubsection})}
 \newcommand{\chapterfont}{\fontsize{20}{24}\selectfont}
 \newcommand{\sectionfont}{\fontsize{18}{22}\selectfont}
 \newcommand{\subsectionfont}{\fontsize{16}{19}\selectfont}
