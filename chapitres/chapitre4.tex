@@ -54,7 +54,8 @@ Cluster scalability & Medium to Large & Small to Medium & Very Large  \\
 \hline
 Cluster installation & Complex & Easy & Medium  \\
 \hline
-Container deployment & YAML based  & Docker based & JSON based 
+Container deployment & YAML based  & Docker based & JSON based \\
+\hline
 \end{tabular}
 \caption{Table Sprint planification}
 \textcolor{white}{I} \label{tab:tab-m}
@@ -72,10 +73,10 @@ Container deployment & YAML based  & Docker based & JSON based
 \end{figure}
 
 
-\paragraph{}This figure illustrates a package design of the main PaaS services. We mainly distinguish :
--	A control plane: which manages assets in the cluster, namely, nodes, pods and other api resources.
--	An assortment of networking services which allow for ingress control in both the network and application layers.
--	An authentication and authorization service: which is aimed to control access to the cluster.
+\paragraph{}This figure illustrates a package design of the main PaaS services. We mainly distinguish :\newline
+-	A control plane: which manages assets in the cluster, namely, nodes, pods and other api resources. \newline
+-	An assortment of networking services which allow for ingress control in both the network and application layers.\newline
+-	An authentication and authorization service: which is aimed to control access to the cluster.\newline
 -	A distributed, scalable, and replicated storage backend which is independent of the infrastructure in place to provide data redundancy and disaster recovery.
 
 \section*{Conclusion}

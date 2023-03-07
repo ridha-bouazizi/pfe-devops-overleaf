@@ -1,0 +1,44 @@
+\graphicspath{{./assets/}}
+\setcounter{mtc}{5}
+\chapter{3rd Sprint: Resource provisioning  }
+\fancyhead[R]{\ungaramond\small\textbf{Chapter V.  3rd Sprint: Resource provisioning  }}
+
+\minitoc
+\newpage
+\section*{Introduction}
+
+
+
+\section{Sprint Backlog}
+
+
+\begin{longtable}[!ht]{|m{1.5cm}|m{3cm}|m{1.5cm}|m{9cm}|}
+\hline
+{\textbf{Epic ID}} & {\textbf{Epic}} & {\textbf{Story ID}} & {\textbf{Story}}\\
+\hline
+1  & Provisioning resources using IaC playbooks and HCP config files.  &  1.1	 & Preparing provider specific(ovh) terraform config. \\
+\cline{3-4}
+& & 1.2 & Preparing ansible playbook to initiate provisioning. \\
+\cline{3-4}
+& & 1.3	& Setting up IaC host machine.  \\
+\cline{3-4}
+& & 1.4	& Cloud provider account and project creation.  \\
+\hline
+\end{longtable}
+
+
+\newpage
+
+\section{UML design : class diagram for cloud infrastructure }
+
+
+\section{“HCP config” diagram for cloud provisioning: }
+The following figure illustrates the main resources declared in our terraform “HCP config”: 
+
+\section{Component diagram of provisioned resources}
+
+The cluster resources were deployed to three regions. Namely, GRA, BHS, SBG. In each region, four instances were created. One of which will join the control plane, two will have the worker compute role and the last will have a second block device in raw format and will join the data storage backend. Various buckets from the object store will be provisioned and will serve as backup storage backends and high speed data storage.  
+\newpage
+
+
+\section*{Conclusion}
