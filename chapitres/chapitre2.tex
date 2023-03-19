@@ -1,46 +1,47 @@
 \graphicspath{{./assets/}}
 \setcounter{mtc}{2}
 \chapter{Requirement analysis  }
-\fancyhead[R]{\ungaramond\small\textbf{Chaptre 2: Requirement analysis  }}
+\fancyhead[R]{\ungaramond\small\textbf{Chapter 2: Requirement analysis  }}
 \minitoc
 \newpage
+
 \section*{Introduction}
-In this chapter, our analysis is aimed at identifying the key actors in our design, the functional and non-functional needs our system is to provide for. We will then move on to an overview of the sprint bursts we have realized. Finally, we will provide a dissection of the ecosystem in the form of various UML diagrams.
+In this chapter, our analysis is aimed at identifying the key actors in our design, the functional and non-functional needs our system is to provide for. We will then move on to an overview of the sprint bursts we have realized. Finally, we will provide a dissection of the ecosystem in the form of various UML diagrams. 
+
 \section{Capturing requirements}
 \subsection{Identifying key actors}
 In this context, an actor is a user or any other system that interacts with the subject by exchanging signals and data.
+
 \paragraph{Cloud architecture related actors:}
 In order to have a devSecOPS compliant approach, it needs to be built on top of a containerized, highly available cloud infrastructure:
-\newline
--	Cloud architect: He is responsible for designing and implementing cloud computing solutions.
-\newline
--	IaC tools: Although being a piece of software, it is necessary in order to automate provisioning and configuration of resources.
-\newline
--	Cloud provider: Usually a third-party entity that allows for elastically allocating resources.
-\newline
--	DevSecOPS team: A devSecOPS engineer is the consumer in this case, he uses the provisioned resources to build an ecosystem that is compliant with organizational needs.
+\begin{itemize}[label={--}]
+\item Cloud architect: He is responsible for designing and implementing cloud computing solutions.
+\item IaC tools: Although being a piece of software, it is necessary in order to automate provisioning and configuration of resources.
+\item Cloud provider: Usually a third-party entity that allows for elastically allocating resources.
+\item DevSecOPS team: A devSecOPS engineer is the consumer in this case, he uses the provisioned resources to build an ecosystem that is compliant with organizational needs.
+\end{itemize}
+
 \paragraph{CI/CD related actors:}
 The cloud resources hold the value of a tool that is then leveraged to assist the development process:
-\newline
--	DevSecOPS team: uses the provisioned resources and follows an agile devSecOPS approach to build an ecosystem that is compliant with organizational needs.
-\newline
--	Developer: A consumer of the devSecOPS ecosystem as well as the CI/CD workflow.
-\newline
--	Company client: He is the end user and provides the specifications on software development.
+\begin{itemize}[label={--}]
+\item DevSecOPS team: uses the provisioned resources and follows an agile devSecOPS approach to build an ecosystem that is compliant with organizational needs.
+\item Developer: A consumer of the devSecOPS ecosystem as well as the CI/CD workflow.
+\item Company client: He is the end user and provides the specifications on software development.
+\end{itemize}
 
 \subsection{Functional requirements}
 
 Formulating an understanding on functional requirements is a primordial phase in the implementation of the subject.
-\newline
--	A cloud-based infrastructure capable of hosting the devSecOPS ecosystem in terms of compute resources, storage and networking.
-\newline
--	A continuous integration platform : The desired goal is to provide a CI workflow that channels the development effort in order to continuously ensure code quality.
-\newline
--	A CD workflow: provide an automated and continuous delivery and deployment process.
+
+\begin{itemize}[label={--}]
+\item A cloud-based infrastructure capable of hosting the devSecOPS ecosystem in terms of compute resources, storage and networking.
+\item A continuous integration platform : The desired goal is to provide a CI workflow that channels the development effort in order to continuously ensure code quality.
+\item A CD workflow: provide an automated and continuous delivery and deployment process.
+\end{itemize}
 
 \subsection{Non-functional requirements}
-\begin{itemize}[label=\textbullet,font=\normalsize]
-\addtolength{\itemindent}{1cm}
+
+\begin{itemize}[label={--}]
 \item High availability and resilience: Typically satisfied by distributed backend resources, orchestration and load balancing of workloads. 
 \item Performance and scalability: Usually dependent on the cloud provider as well as the used technologies.
 \item Security: An inbuilt quality that cloud and DevSecOPS offer by design.
@@ -48,12 +49,12 @@ Formulating an understanding on functional requirements is a primordial phase in
 \item Usability: A somewhat hard to achieve requirement due to the rarity of a technologically adept workforce. 
 \item Relatively low cost : the need to prioritize self-hosting and adopting opensource alternatives.
 \end{itemize}
-\newpage
+
+
 \section{Product backlog }
 
 \subsection{Backlog history }
-
-\begin{longtable}[!ht]{|m{1cm}|m{3cm}|m{1cm}|m{7cm}|m{1.2cm}|}
+\begin{longtable}[H]{|m{1cm}|m{3cm}|m{1cm}|m{7cm}|m{1.2cm}|}
 \hline
  {\textbf{Epic ID}} & {\textbf{EPIC}} & {\textbf{Story ID}} & {\textbf{Story}} & {\textbf{Prior-ity}} \\
  \hline
@@ -90,8 +91,7 @@ Formulating an understanding on functional requirements is a primordial phase in
 \cline{3-5}
 &   & 7.2 &	 \raggedright Using GitOPS and devOPS tools to automate CI/CD pipelines.	 & \\
    \hline
-   \newpage
-     \hline
+   
 8 & \raggedright Deployment of authentication / authorization backend 	& 8.1 & \raggedright Self-managing distributed database storage backends (redis, mongoDB, postgresql).	 & \\
 \cline{3-5}
 &   & 8.2 &	\raggedright Deployment and configuration of authentication and authorization services.	 & \\
@@ -104,20 +104,15 @@ Formulating an understanding on functional requirements is a primordial phase in
 \cline{3-5}
 &   & 9.3 &	\raggedright Preparing and applying backup strategy for PaaS specific workloads.	 & \\
  \hline
-% 10	& \raggedright Load testing, benchmarking.& 10.1 & Load testing and benchmarking of assets. & \\	
-% \hline
-
+\caption{ Backlog History Table }
 \end{longtable}
 % \raggedright for space issue
 
-\newpage
-\subsection{Sprint planification }
+\subsection{Sprint planning }
 The project lasted seven months and a half starting on March 1st 2022. Overall, ten sprints have been followed with the typical duration of 3 weeks for each. 
 
 
-\begin{table}[h!]
-\center
-\begin{tabular}[b]{|m{2cm}|m{9cm}|m{2cm}|}
+\begin{longtable}[H]{|m{2cm}|m{10cm}|m{2cm}|}
 \hline
  {\textbf{Sprint ID}} & {\textbf{Sprint Details }} & {\textbf{Duration }} \\ \hline 
 0 
@@ -174,54 +169,29 @@ Securing access to company assets using an Authentication/Authorization middlewa
 Putting in place a disaster recovery strategy that leverages distributed storage and S3 compliant object storage. 
 &
 3 weeks \\ \hline
-% 10 
-% &
-% Assessing the performance of the PaaS put in place and planning to enhancements 
-% &
-% 2 weeks \\ \hline
-\end{tabular}
-\caption{Table Sprint planification}
-\textcolor{white}{I} \label{tab:tab-m}
-\end{table}
 
-\newpage
+\caption{Table Sprint planning}
+\end{longtable}
+
+
 \section{Modeling for cloud architecture and devops }
 
-In order to facilitate collaboration and formulate an understanding of the system specifications and requirements, we have used the Unified Visual Language (UML). 
+In order to facilitate collaboration and formulate an understanding of the system specifications and requirements, we have used the Unified Modeling Language (UML). 
 
 \subsection{Cloud related diagrams }
 
-% \subsubsection{Package diagram of the underlying cloud resources:}
-
-% \begin{figure}[!ht]\centering
-% \includegraphics[width=0.8\textwidth,angle=00]{assets/f2.jpg}
-% \caption{Package diagram of the underlying cloud resources}
-% \label{fig:cloudResrc}
-% \end{figure}
-
-% \noindent The cluster resources are basically cloud instances with different specifications tailored to their use cases. Three major groups of resources are distinguished in this diagram : Control plane instances, Compute instances and storage assets which are object store buckets and compute instances to which raw block stores are attached. 
-
-% \newpage
-% \subsubsection{Package diagram for the PaaS logical components:}
-% \begin{figure}[!ht]\centering
-% \includegraphics[width=0.8\textwidth,angle=00]{assets/f3.jpg}
-% \caption{Package diagram of the underlying cloud resources}
-% \label{fig:PaasDiag}
-% \end{figure}
-% This figure illustrates a package design of the main PaaS services. 
-
 \subsubsection{Class diagram of the provisioned cloud resources:}
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f2.jpg}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f2.jpg}
 \caption{Package diagram of the underlying cloud resources}
 \label{fig:f2}
 \end{figure}
 
 \subsubsection{Sequence diagram for the provisioning and configuration:}
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f3.jpg}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f3.jpg}
 \caption{Sequence diagram for the provisioning and configuration}
 \label{fig:f3}
 \end{figure}
@@ -230,29 +200,28 @@ In order to facilitate collaboration and formulate an understanding of the syste
 
 \subsubsection{Sequence diagram of a sample deployment: }
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f4.jpg}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f4.jpg}
 \caption{Sequence diagram of a sample deploymen}
 \label{fig:f4}
 \end{figure}
 
-\newpage 
+
 \subsubsection{Sequence diagrams of the CI/CD workflow: }
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f5.jpg}
-\caption{Sequence diagrams of the CI/CD workflow}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f5.jpg}
+\caption{Sequence diagrams of the CI/CD workflow in DEV}
 \label{fig:f5}
 \end{figure}
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f6.jpg}
-\caption{Sequence diagrams of the CI/CD workflow}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f6.jpg}
+\caption{Sequence diagrams of the CI/CD workflow in PROD}
 \label{fig:f6}
 \end{figure}
 
 
-\newpage
 \subsection{Technological choices }
 % \paragraph{Development tools }
 In this section, we layout the cloud provider choice,
@@ -379,27 +348,23 @@ Shell was used to interface with the linux operating system. For conversing with
 
 To template various configuration files that are dependent on the deployment environment, we used YTT for YAML/JSON. Jinja2 was the main templating tool for ansible playbooks. 
 
-\newpage
-
 \section{Architectural specifications}
 
 \subsection{Physical architecture}
 
 The following figure is an overview of the infrastructure resource setup:
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f7.jpg}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f7.jpg}
 \caption{Physical architecture}
 \label{fig:f7}
 \end{figure}
 
-\newpage
-
 \subsection{PaaS deployment architecture} 
 Next we layout the organization of the subsystems, software classes, and layers that make the complete logical system of our PaaS infrastructure :
 
-\begin{figure}[!ht]\centering
-\includegraphics[width=0.8\textwidth,angle=00]{assets/f8.jpg}
+\begin{figure}[H]\centering
+\includegraphics[width=1.0\textwidth,angle=00]{assets/f8.jpg}
 \caption{PaaS infrastructure}
 \label{fig:f8}
 \end{figure}
@@ -412,11 +377,3 @@ To implement the project, the company has provided us with the necessary hardwar
 All the functional and non-functional requirements have been viewed in this chapter through the use of package, class and sequence diagrams. We have also formed an understanding on the underlying resources and services through the physical architecture and the PaaS deployment diagram.
 
 
-% \paragraph{Infrastructure as code tools  }
-
-% \paragraph{Containerization and orchestration techniques  }
-% \paragraph{Self-hosted paas services }
-% \paragraph{Cloud provider choice}
-
-
-% \section*{Conclusion}

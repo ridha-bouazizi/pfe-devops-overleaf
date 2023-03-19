@@ -12,7 +12,7 @@
 %---------------------------------------%
 %---------------------------------------%
 
-
+% \usepackage{listings}
 
 
 %---------------------------------------%
@@ -28,16 +28,17 @@
 \RequirePackage[left=2.5cm,right=2cm,top=2.5cm,bottom=2.5cm,bindingoffset=1cm]{geometry}
 \usetikzlibrary{arrows}
 \graphicspath{{./img/}}
-%\allowdisplaybreaks
-%\renewcommand{\baselinestretch}{1.3} 
+\allowdisplaybreaks
+\renewcommand{\baselinestretch}{1.3} 
+
+
 %---------------------------------------%
 %---------------------------------------%
 %---------------------------------------%
 
 
-
-
-
+\RequirePackage{minted}
+\RequirePackage{listings}
 
 %---------------------------------------%
 %		commandes personnelles			%
@@ -45,9 +46,9 @@
 \onehalfspacing%espace interligne = 1,5
 % \setlength\parindent{0pt} % sets indent to zero
 \setlength{\parskip}{6pt} % changes vertical space between paragraphs
-\renewcommand\thechapter{\Roman{chapter}}
-\renewcommand\thesection{\Roman{section}.}
-\renewcommand{\thesubsection}{\arabic{subsection}.}
+\renewcommand\thechapter{\Roman{chapter}.}
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.}
 \renewcommand{\thesubsubsection}{(\alph{subsubsection})}
 \newcommand{\chapterfont}{\fontsize{20}{24}\selectfont}
 \newcommand{\sectionfont}{\fontsize{18}{22}\selectfont}
@@ -58,9 +59,9 @@
     \fancyhf{}%
 	\fancyfoot[C]{\thepage}
 }
-%\setcounter{tocdepth}{4} 
+\setcounter{tocdepth}{3} 
 \setcounter{secnumdepth}{3}
-\setcounter{minitocdepth}{2} 
+\setcounter{minitocdepth}{3} 
 \setlength{\mtcindent}{24pt} 
 \renewcommand{\mtcfont}{\small\rm}
 \renewcommand{\mtcSfont}{\small\bf}
@@ -103,3 +104,36 @@
 %---------------------------------------%
 %---------------------------------------%
 %---------------------------------------%
+%% Defining section, subsection and subsubsection spacing
+\usepackage{titlesec}
+\titlespacing{\section}{7mm}{8pt}{8pt}
+\titlespacing{\subsection}{10mm}{8pt}{8pt}
+\titlespacing{\subsubsection}{13mm}{8pt}{6pt}
+\titlespacing{\chapter}{14mm}{8pt}{6pt}
+% ***********
+\usepackage{pstcol}
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1.2ex \hfill \kern \z@}
+\def\@makechapterhead#1{
+    \vspace*{30\p@}%
+    {\parindent \z@ \centering \reset@font
+        \thickhrulefill\quad 
+        \scshape\bfseries\textit{\@chapapp{}  \thechapter}  
+        \quad \thickhrulefill
+        \par\nobreak
+        \vspace*{10\p@}%
+        \interlinepenalty\@M
+        \hrule
+        \vspace*{10\p@}%
+        \Huge \bfseries #1 \par\nobreak
+        \par
+        \vspace*{10\p@}%
+        \hrule
+        \vskip 50\p@
+    }
+   
+   
+}
+\def\@makeschapterhead#1{\hbox{%
+    \huge\hbox{\textbf{#1}}%
+}\par\vskip 1cm}

@@ -1,17 +1,39 @@
 \documentclass{classes/memoire}
+\usepackage{minted}
+\setminted[]{
+    xleftmargin=.75cm,
+    xrightmargin=.75cm,
+    frame=single,
+    framesep=.25cm,
+    linenos,
+    tabsize=2,
+    breaklines
+}
+\usepackage{listings}
+% \lstset{language=YAML}
+\lstdefinestyle{yaml}{
+     basicstyle=\color{blue}\footnotesize,
+     rulecolor=\color{black},
+     string=[s]{'}{'},
+     stringstyle=\color{blue},
+     comment=[l]{:},
+     commentstyle=\color{black},
+     morecomment=[l]{-}
+ }
+
 \usepackage{lmodern}
 \usepackage{garamond}
 \usepackage{comment}
 \usepackage{geometry}
 \usepackage[options]{nohyperref}
-
-\PassOptionsToPackage{russian}{babel}
- \geometry{
- a4paper,
- total={170mm,257mm},
- left=20mm,
- top=20mm,
- }
+% \PassOptionsToPackage{russian}{babel}
+ % \geometry{
+ % a4paper,
+ % total={170mm,257mm},
+ % left=20mm,
+ % top=20mm,
+ % }
+\renewcommand\lstlistoflistingscaption{List of source codes}
 \renewcommand{\mtctitle}{Table of contents}
 \begin{document}
 %\frontmatter
@@ -27,6 +49,8 @@
 \tableofcontents
 \listoftables 
 \listoffigures
+
+\lstlistoflistings
 %\garamond
 %\include{frontmatter/glossaire}
 \include{chapitres/introduction}
@@ -47,10 +71,6 @@
 \bibliographystyle{unsrt}
 \nocite{*}
 \bibliography{bibliographie}
-
-
-
-
 
 
 
