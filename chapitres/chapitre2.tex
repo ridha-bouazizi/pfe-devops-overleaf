@@ -50,7 +50,7 @@ Formulating an understanding on functional requirements is a primordial phase in
 \item Relatively low cost : the need to prioritize self-hosting and adopting opensource alternatives.
 \end{itemize}
 
-
+\newpage
 \section{Product backlog }
 
 \subsection{Backlog history }
@@ -108,6 +108,8 @@ Formulating an understanding on functional requirements is a primordial phase in
 \end{longtable}
 % \raggedright for space issue
 
+
+\newpage
 \subsection{Sprint planning }
 The project lasted seven months and a half starting on March 1st 2022. Overall, ten sprints have been followed with the typical duration of 3 weeks for each. 
 
@@ -170,7 +172,7 @@ Putting in place a disaster recovery strategy that leverages distributed storage
 &
 3 weeks \\ \hline
 
-\caption{Table Sprint planning}
+\caption{ Sprint planning}
 \end{longtable}
 
 
@@ -185,28 +187,37 @@ In order to facilitate collaboration and formulate an understanding of the syste
 \begin{figure}[H]\centering
 \includegraphics[width=1.0\textwidth,angle=00]{assets/f2.jpg}
 \caption{Package diagram of the underlying cloud resources}
-\label{fig:f2}
+\label{fig:Package diagram of the underlying cloud resources}
 \end{figure}
+
 
 \subsubsection{Sequence diagram for the provisioning and configuration:}
-
+ % \afterpage{\clearpage
+% \begin{landscape}
 \begin{figure}[H]\centering
-\includegraphics[width=1.0\textwidth,angle=00]{assets/f3.jpg}
+% \rotatebox{90}{
+% \begin{minipage}{\textheight}
+\includegraphics[width=1\textwidth,angle=90,keepaspectratio]{assets/f3.jpg}
 \caption{Sequence diagram for the provisioning and configuration}
-\label{fig:f3}
+% \end{minipage}%}
 \end{figure}
+
+% \end{landscape}
+% }
 
 \subsection{CI/CD related diagrams}
 
 \subsubsection{Sequence diagram of a sample deployment: }
-
+% \afterpage{\clearpage
 \begin{figure}[H]\centering
-\includegraphics[width=1.0\textwidth,angle=00]{assets/f4.jpg}
-\caption{Sequence diagram of a sample deploymen}
+% \rotatebox{90}{
+% \begin{minipage}{\textheight}
+\includegraphics[width=0.7\textwidth,angle=00]{assets/f4.jpg}
+\caption{Sequence diagram of a sample deployment}
 \label{fig:f4}
+% \end{minipage}}
 \end{figure}
-
-
+% }
 \subsubsection{Sequence diagrams of the CI/CD workflow: }
 
 \begin{figure}[H]\centering
@@ -227,27 +238,27 @@ In order to facilitate collaboration and formulate an understanding of the syste
 In this section, we layout the cloud provider choice,
 \subsubsection{Cloud provider choice: } 
 
-\paragraph{OVH : }
+\paragraph{OVH\cite{OVHcloud}: }
 
 A decisive factor concerning the cloud provider choice is related to company’s desire to opt mainly for a provider that is based in France.  
 
-\paragraph{Openstack: }
+\paragraph{Openstack\cite{OpenStack}: }
 
 OVH uses openstack as its backing cloud computing infrastructure. Thus, conversing with components as neutron, nova, glance, swift is a must. 
 
 \subsubsection{Infrastructure as code tools }
 
-\paragraph{Terraform: }
+\paragraph{Terraform\cite{Terraform}: }
 
 An industry standard for conversing with cloud providers in order to provision and configure resources. 
 
-\paragraph{Ansible: }
+\paragraph{Ansible\cite{Ansible}: }
 
 We have opted for ansible because it’s faster than its alternatives namely chef, and easier to use.  
 
 \subsubsection{Containerization and orchestration techniques: }
 
-\paragraph{Container orchestrator: Kubernetes v1.21 }
+\paragraph{Container orchestrator: Kubernetes v1.21\cite{Kubernetes} }
 
 An open source container orchestration tool that automates the deployment, scaling, and managing containerized applications. 
 
@@ -274,7 +285,7 @@ A cloud-native plugin deployment in Kubernetes that uses the CNI API to provide 
 
 \subsubsection{Self-hosted PaaS services }
 
-\paragraph{Distributed storage backend: Ceph }
+\paragraph{Distributed storage backend: Ceph\cite{Ceph} }
 
 A highly reliable, open source, distributed storage platform offering bloc , filesystem and object storage volumes to be leveraged by the orchestrator. 
 
@@ -282,7 +293,7 @@ A highly reliable, open source, distributed storage platform offering bloc , fil
 
 An open-source edge router serving as an ingress controller, a reverse proxy and a load balancer. 
 
-\paragraph{Layer 2 load balancer: MetalLB }
+\paragraph{Layer 2 load balancer: MetalLB}
 
 This opensource load balancer provides support for bare metal Kubernetes clusters using standard protocols. 
 
@@ -340,11 +351,11 @@ A platform that offers port forwarding and secure file transfer over ssh.
 
 \subsubsection{Development languages }
 
-\paragraph{Scripting: python, shell, groovy }
+\paragraph{Scripting: python\cite{Python}, shell, groovy\cite{Groovy} }
 
 Shell was used to interface with the linux operating system. For conversing with APIs, an assortment of python scripts were developed to automate various tasks, namely, database backups. Jenkins pipelines and configurations were written in groovy. 
 
-\paragraph{Templating: YTT, jinja2 }
+\paragraph{Templating: YTT\cite{YTT}, jinja2\cite{Jinja2} }
 
 To template various configuration files that are dependent on the deployment environment, we used YTT for YAML/JSON. Jinja2 was the main templating tool for ansible playbooks. 
 
@@ -374,6 +385,13 @@ Next we layout the organization of the subsystems, software classes, and layers 
 To implement the project, the company has provided us with the necessary hardware equipment, certified preliminary training as well as the desired cloud resources.
 
 \section*{Conclusion}
-All the functional and non-functional requirements have been viewed in this chapter through the use of package, class and sequence diagrams. We have also formed an understanding on the underlying resources and services through the physical architecture and the PaaS deployment diagram.
+In conclusion, requirement analysis is a crucial step in any project, especially when it comes to cloud computing and DevOps.  
 
+By identifying and understanding the requirements of the project, we have created a solid foundation that ensures the success of the implementation phase. 
+
+The requirement analysis process has involved identifying the project goals, defining the user personas, and outlining the technical requirements of the project. It has also involved determining the specific business requirements, infrastructure requirements, and application requirements. 
+
+All of these requirements are critical to ensuring that the PaaS environment is tailored to meet the specific needs of the organization. 
+
+By conducting a thorough requirement analysis, ensured that the project is well-defined, properly scoped, and that the stakeholders' expectations are appropriately managed. It provides a solid framework for making informed decisions about the design and implementation of the PaaS environment, as well as determining the tools and technologies that will be used.
 

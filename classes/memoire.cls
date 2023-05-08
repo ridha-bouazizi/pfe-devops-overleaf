@@ -47,8 +47,8 @@
 % \setlength\parindent{0pt} % sets indent to zero
 \setlength{\parskip}{6pt} % changes vertical space between paragraphs
 \renewcommand\thechapter{\Roman{chapter}.}
-\renewcommand\thesection{\arabic{section}.}
-\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.}
+\renewcommand\thesection{\Roman{section}.}
+\renewcommand{\thesubsection}{\Roman{section}.\arabic{subsection}.}
 \renewcommand{\thesubsubsection}{(\alph{subsubsection})}
 \newcommand{\chapterfont}{\fontsize{20}{24}\selectfont}
 \newcommand{\sectionfont}{\fontsize{18}{22}\selectfont}
@@ -101,6 +101,9 @@
 \titleformat{\subsubsection}{\ungaramond\subsubsectionfont\bfseries}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}{\ungaramond\bfseries\paragraphfont}{\theparagraph}{1em}{}
 \titleformat{\subparagraph}{\ungaramond\bfseries\paragraphfont}{\thesubparagraph}{1em}{}
+
+
+
 %---------------------------------------%
 %---------------------------------------%
 %---------------------------------------%
@@ -113,9 +116,9 @@
 % ***********
 \usepackage{pstcol}
 \makeatletter
-\def\thickhrulefill{\leavevmode \leaders \hrule height 1.2ex \hfill \kern \z@}
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
 \def\@makechapterhead#1{
-    \vspace*{30\p@}%
+    \vspace*{10\p@}
     {\parindent \z@ \centering \reset@font
         \thickhrulefill\quad 
         \scshape\bfseries\textit{\@chapapp{}  \thechapter}  
@@ -123,17 +126,97 @@
         \par\nobreak
         \vspace*{10\p@}%
         \interlinepenalty\@M
-        \hrule
-        \vspace*{10\p@}%
+        % \hrule
+        % \vspace*{10\p@}%
         \Huge \bfseries #1 \par\nobreak
         \par
         \vspace*{10\p@}%
-        \hrule
-        \vskip 50\p@
+        % \hrule
+        \vskip 20\p@
+        
     }
-   
-   
 }
 \def\@makeschapterhead#1{\hbox{%
     \huge\hbox{\textbf{#1}}%
-}\par\vskip 1cm}
+}\par\vskip 1cm} 
+
+
+% /// TO check
+% load the book class using a4paper
+% \LoadClass[12pt,a4paper, oneside]{book}
+% \usepackage[a4paper]{geometry}
+
+% % give the header a bit more room for fancyhdr below
+% % otherwise LaTeX will spew on each page
+% \addtolength{\headheight}{3pt}
+
+% % first set to zero ... 
+% \setlength{\oddsidemargin}{-1in}
+% \setlength{\evensidemargin}{-1in}
+% \setlength{\topmargin}{-1in}       
+
+% % adjust these if printer is off by a bit
+% \setlength{\hoffset}{0mm}
+% \setlength{\voffset}{0mm}
+% % PS also that the optimal number of characters per line 
+% % for readability is only 60-70, we're over so we'll be a
+% % bit more generous on the evensidemargin
+
+% \addtolength{\oddsidemargin}{22mm} 
+% \addtolength{\evensidemargin}{22mm}
+% \addtolength{\topmargin}{20mm}
+
+% % set up some of the spacing
+% \setlength{\marginparwidth}{40pt}  
+% \setlength{\marginparsep}{10pt}
+% \setlength{\headsep}{0.2in}
+
+% % A4 dimensions [mm]: 209.903 x 297.039
+% \setlength{\textwidth}{21 cm}
+% \setlength{\textheight}{30 cm}
+
+% % fix up width
+% \addtolength{\textwidth}{-\oddsidemargin}
+% \addtolength{\textwidth}{-\evensidemargin}
+% % now we've added 2inches in setting up margins
+% \addtolength{\textwidth}{-2in}
+
+% % fix up height
+% \addtolength{\textheight}{-2\topmargin}
+% \addtolength{\textheight}{-\headheight}
+% \addtolength{\textheight}{-\headsep}
+% \addtolength{\textheight}{-\footskip}
+% % now we've added 2inches in setting up margins
+% \addtolength{\textheight}{-2in}
+
+% \counterwithout{figure}{section}
+% \counterwithout{figure}{subsection}
+% \setcounter{figure}{chapter}
+
+%============== Table & Figure Captions Style ==============%
+
+\usepackage{caption}
+% \captionsetup[table]{
+%   labelfont=bf,
+%   labelsep = newline,
+%   name = Table,
+%   justification=centering,
+%   singlelinecheck=false,%%%%%%% a single line is centered by default
+
+%   skip = \medskipamount}
+
+% \captionsetup[figure]{
+%   labelfont=bf,
+%   labelsep = newline,
+%   name = Figure,
+%   justification=centering,
+%   singlelinecheck=false,
+%   labelsep=colon,
+%   skip = \medskipamount}
+
+\renewcommand{\thefigure}{\Roman{section}.\arabic{figure}\space}
+\renewcommand{\thetable}{\Roman{section}.\arabic{table}\space}
+\renewcommand{\thelisting}{\Roman{section}.\arabic{listing}\space}
+
+% \usepackage{multicol}
+% \setlength\columnsep{3ex}
